@@ -1,0 +1,44 @@
+$(elemento ou elementos).uma_cao();
+pegar atraves das tag, Id ou class
+exibir e esconder e bom quando a pessoa digita algo errado
+no formulario, ai ja exibi que ele escreveu algo errado
+
+
+//exiber elemento pela tag
+function exibeElementoPorTag(tag){
+	$(tag).show();
+}
+
+//ocultar elemento pela tag
+function ocultaElementoPorTag(tag){
+	$(tag).hide();
+}
+
+//exibir e ocultar por classe
+function exibeElementoPorClasse(classe){
+	$('.'+classe).show();
+}
+function ocultaElementoPorClasee(classe){
+	$('.'+classe).hide();
+}
+
+//por id
+function exibeElementoPorId(id){
+	$('#'+id).show();
+}
+function ocultaElementoPorId(id){
+	$('#'+id).hide();
+}
+
+
+
+//usando em input
+<button type="button" class="btn btn-danger" onclick="ocultaElementoPorTag('input')">Esconder inputs</button>
+<button type="button" class="btn btn-success" onclick="exibeElementoPorTag('input')">Exibir inputs</button>
+
+//usando em paragrafo
+<button type="button" class="btn btn-danger" onclick="ocultaElementoPorTag('p')">Esconder parágrafos</button>
+<button type="button" class="btn btn-success" onclick="exibeElementoPorTag('p')">Exibir parágrafos</button>
+
+//pode fazer 2 chamadas na mesma funcao exemplo
+onclick="ocultaElementoid('campo_1');ocultaElementoPorid('campor_2');

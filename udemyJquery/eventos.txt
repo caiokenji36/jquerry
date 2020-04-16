@@ -1,0 +1,40 @@
+O que sao eventos?
+pode ser executado pelo usuario dentro do html e pode ser capituradas
+exemplo quando a pessoa clica em um input, o input ganha foco
+
+$(document).ready(function(){
+	console.log("O DOM esta carregado!");
+});
+
+.click()-acionado no clique do mouse.
+.dblclick()-acionado no clique duplo do mouse.
+.mousedown()-acionado no clique do mouse(soltando ou nao).
+.mouseover()-acionado quando cursor do mouse sobrepoe o elemento o elemento da pagina
+.mouseout()-acionado quando o cursor do mouse sai da area de um elemento da pagina.
+
+
+<script type="text/javascript">
+			
+	$(document).ready(function(){
+	//click
+	//dblclick
+	//mouseover
+	//mouseot
+
+	$('#div1').click(function(){
+		alert('elemento foi clicado')
+	});
+});
+</script>
+
+
+teclado
+.keydown()-acionado quando uma tecla e pressionada
+.keypress()- quando uma tecla e pressionado mas nao pega o alt,ctr,esc,shift,etc.
+.keyup()-acionada no momento em que a tecla e liberada
+
+
+formularios
+.focus()-acionado quando o elemento recebe o foco do cursosr.
+.blur()- acionado quando o elemento perde o foco do cursor.
+.change() - acionado quando o estado do elemento e modificado.
