@@ -5,7 +5,9 @@ $(document).ready(function () { //quando sua pagina estiver pronta, estiver carr
     atualizaTamanho();
     inicializaContadores();
     inicializaCronometro();
+    inicializaMarcadores();
     $("#botao-reiniciar").click(reiniciaJogo);
+    
 });
 
 /*$( pode ser feito assim tambem
@@ -50,13 +52,21 @@ function inicializaCronometro() {
             tempoRestante--;
             $("#tempo-digitacao").text(tempoRestante);
             if (tempoRestante < 1) {
-                campo.attr("disabled", true);
                 clearInterval(cronometroID);
-                campo.addClass("campo-desativado");// aqui vc esta adicionando uma classe que vc criou no css
-            }
+                finalizaJogo();
+            }    
 
         }, 1000);
     });
+
+}
+
+function finalizaJogo(){
+    campo.attr("disabled", true);
+               
+    //campo.addClass("campo-desativado");// aqui vc esta adicionando uma classe que vc criou no css
+    campo.toggleClass("campo-desativado");
+    inserePlacar();
 
 }
 
@@ -75,8 +85,33 @@ function reiniciaJogo() {
     $("#tempo-digitacao").text(tempoInicial);
     inicializaCronometro();
 
+    //campo.removeClass("campo-desativado"); // para remover a classe
+    
+    campo.toggleClass("campo-desativado"); //ele funciona como o add e remove junto
+    campo.removeClass("borda-vermelha");
+    campo.removeClass("borda-verde");
 
 }
+
+function inicializaMarcadores(){
+    let frase = $(".frase").text();
+    campo.on("input",function(){
+        let digitado = campo.val();
+        let comparavel = frase.substr(0,digitado.length); //vai pegar do começo ate onde eu digitei
+    
+        if(digitado == comparavel){
+            campo.addClass("borda-verde");
+            campo.removeClass("borda-vermelha");
+        }else{
+            campo.addClass("borda-vermelha");
+            campo.removeClass("borda-verde");
+        }
+    });
+    
+}
+
+
+
 
 
 
