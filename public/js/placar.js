@@ -1,4 +1,7 @@
 
+$("#botao-placar").click(mostraPlacar);
+
+
 function inserePlacar(){
     let corpoTabela = $(".placar").find("tbody"); //o find quer dizer que vc esta procurando uma tbody que esta dentro de placar
     let usuario = "Caio";
@@ -9,18 +12,36 @@ function inserePlacar(){
     
     //corpoTabela.append(linha); //append para adicionar no html, tambem sempre adiciona no final da tabela
     corpoTabela.prepend(linha); // esse adiciona antes
+
+    $(".placar").slideDown(500);
+    scrollPlacar();
+
+}
+
+function scrollPlacar(){
+    var posicaoPlacar = $(".placar").offset().top;   
+
+posicaoPlacarPx = posicaoPlacar+"px";
+
+setTimeout( function () {
+    $('body, html').stop().animate({ scrollTop: posicaoPlacarPx }, 100);
+}, 500);
+
 }
 
 
 function removeLinha(){
-    $(".botao-remover").click(function(event){
         event.preventDefault(); //para nao acontecer algo de padrao
-        $(this).parent().parent().remove();
-    });
+        //$(this).parent().parent().remove();
+        let linha = $(this).parent().parent();
+        linha.fadeOut(1000); // igual o remover, mas com efeito
+        setTimeout(function(){
+            linha.remove();
+        },1000);
+        
+ 
     }
     
-
-
 
 function novaLinha(usuario, numPalavras){
     let linha = $("<tr>");
@@ -38,4 +59,12 @@ function novaLinha(usuario, numPalavras){
     linha.append(colunaRemover);
     
     return linha;
+}
+
+function mostraPlacar(){
+    //$(".placar").show(); //quando clica mostra e o hide esconde
+   // $(".placar").toggle();//ele ja faz o show e o hide junto
+  // $(".placar").slideDown(2000); // coloca uma animacao de aparecer e tem o slideUp
+  $(".placar").stop().slideToggle(800); // faz os 2 ao mesmo tempo
+
 }

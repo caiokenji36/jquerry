@@ -32,7 +32,9 @@ function atualizaTamanho() {
 
 
 function inicializaContadores() {
+    
     campo.on("input", function () {
+        
         let conteudo = campo.val();
         let qtdPalavras = conteudo.split(/\S+/).length - 1;
         $("#contador-palavras").text(qtdPalavras);
@@ -46,8 +48,9 @@ function inicializaContadores() {
 
 function inicializaCronometro() {
 
-    let tempoRestante = $("#tempo-digitacao").text();
+    
     campo.one("focus", function () {
+        let tempoRestante = $("#tempo-digitacao").text();
         let cronometroID = setInterval(function () {
             tempoRestante--;
             $("#tempo-digitacao").text(tempoRestante);
@@ -94,8 +97,8 @@ function reiniciaJogo() {
 }
 
 function inicializaMarcadores(){
-    let frase = $(".frase").text();
     campo.on("input",function(){
+        let frase = $(".frase").text();
         let digitado = campo.val();
         let comparavel = frase.substr(0,digitado.length); //vai pegar do começo ate onde eu digitei
     
@@ -108,6 +111,12 @@ function inicializaMarcadores(){
         }
     });
     
+}
+
+
+function atualizaTempoInicial(tempo){
+    tempoInicial = tempo;
+    $("#tempo-digitacao").text(tempo);
 }
 
 

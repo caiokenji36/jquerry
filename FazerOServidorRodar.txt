@@ -1,0 +1,5 @@
+Para ver se o nodeJ esta funcionando
+entrar na pasta servidor pelo terminal e colocar npm start
+se aparecer servidor iniciado é pq deu certo.
+
+Meu jogo esta aqui http://localhost:3000/principal.html
