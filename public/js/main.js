@@ -7,6 +7,17 @@ $(document).ready(function () { //quando sua pagina estiver pronta, estiver carr
     inicializaCronometro();
     inicializaMarcadores();
     $("#botao-reiniciar").click(reiniciaJogo);
+    atualizaPlacar();
+    //selectize é um plugin externo que eu baixei
+    $("#usuarios").selectize({
+        create:true,
+        sortField: 'text'
+    });
+
+    //tooltipster é um plugin externo que eu baixei
+    $(".tooltip").tooltipster({
+        trigger: "custom"
+    });
     
 });
 

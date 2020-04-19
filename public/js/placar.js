@@ -1,10 +1,11 @@
 
 $("#botao-placar").click(mostraPlacar);
+$("#botao-sync").click(sincronizaPlacar);
 
 
 function inserePlacar(){
     let corpoTabela = $(".placar").find("tbody"); //o find quer dizer que vc esta procurando uma tbody que esta dentro de placar
-    let usuario = "Caio";
+    let usuario = $("#usuarios").val();
     let numPalavras=$("#contador-palavras").text();
    
     let linha = novaLinha(usuario, numPalavras);
@@ -19,7 +20,7 @@ function inserePlacar(){
 }
 
 function scrollPlacar(){
-    var posicaoPlacar = $(".placar").offset().top;   
+    let posicaoPlacar = $(".placar").offset().top;   
 
 posicaoPlacarPx = posicaoPlacar+"px";
 
@@ -67,4 +68,50 @@ function mostraPlacar(){
   // $(".placar").slideDown(2000); // coloca uma animacao de aparecer e tem o slideUp
   $(".placar").stop().slideToggle(800); // faz os 2 ao mesmo tempo
 
+}
+
+//salvar placar no servidor
+function sincronizaPlacar(){
+    let placar = [];
+    let linhas = $("tbody>tr"); //pegar todas tr que sao filhas de tbody
+    linhas.each(function(){ // each é igual o for each
+        let usuario = $(this).find("td:nth-child(1)").text();
+        let palavras = $(this).find("td:nth-child(2)").text();
+        
+        let score = {
+            usuario: usuario,
+            pontos: palavras
+        };
+
+        placar.push(score);
+    });
+
+    let dados = {
+        placar: placar
+    };
+
+    $.post("http://localhost:3000/placar",dados,function(){
+        console.log("Salvei");
+        $(".tooltip").tooltipster("open").tooltipster("content","Sucesso ao sincronizar");
+    }).fail(function(){
+        $(".tooltip").tooltipster("open").tooltipster("content","Falha ao sincronizar");
+    }).always(function(){
+        setTimeout(function(){
+            $(".tooltip").tooltipster("close");
+        },1200);
+        
+    });
+}
+
+
+//pegar placar do servidor
+function atualizaPlacar(){
+
+    $.get("http://localhost:3000/placar",function(data){
+        $(data).each(function(){
+            let linha = novaLinha(this.usuario, this.pontos);
+            linha.find(".botao-remover").click(removeLinha);
+            $("tbody").append(linha);
+        });
+    });
 }
